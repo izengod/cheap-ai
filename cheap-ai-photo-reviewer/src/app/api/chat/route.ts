@@ -1,10 +1,11 @@
 import { createOllama } from "ollama-ai-provider";
-import { StreamingTextResponse, streamText } from "ai";
+import { streamText } from "ai";
 
 const ollama = createOllama();
 
 export async function POST(req: Request) {
   const { encodedFiles } = await req.json();
+  console.log(`server encodedFiles: ${encodedFiles}`);
 
   const result = await streamText({
     model: ollama("llava-llama3"),
@@ -31,5 +32,5 @@ export async function POST(req: Request) {
     ],
   });
 
-  return new StreamingTextResponse(result.toAIStream());
+  return result.toDataStreamResponse();
 }

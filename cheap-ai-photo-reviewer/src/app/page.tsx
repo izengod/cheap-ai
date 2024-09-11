@@ -32,15 +32,15 @@ export default function Chat() {
   });
 
   useEffect(() => {
-    if (
-      !isLoading &&
-      encodedFiles.length > 0 &&
-      !messages.find(({ role }) => role !== "user")
-    ) {
+    console.log(`isLoading: ${isLoading}`);
+    console.log(`encodedFiles: ${encodedFiles}`);
+    if (!isLoading && encodedFiles.length > 0) {
+      console.log("calling handleSubmit");
       handleSubmit();
     }
   }, [isLoading, encodedFiles, messages, handleSubmit]);
 
+  console.log(`messages: ${messages}`);
   return (
     <div className="flex gap-2 m-5">
       <div className="w-1/2">
@@ -53,7 +53,7 @@ export default function Chat() {
             >
               <input {...getInputProps()} />
               <p className="text-2xl font-bold">
-                Drag 'n' drop your photo here
+                Drag and drop your photo here
               </p>
             </div>
           )}
